@@ -1,10 +1,5 @@
 <x-front-layout title="{{ $movie->name }}">
 
-    @section('css')
-        <link href="https://vjs.zencdn.net/7.15.4/video-js.css" rel="stylesheet"/>
-
-    @endsection
-
     @php
         $last_played_time = session('last_played_time_' . $movie->id);
         $last_played_time = session('last_played_time_' . $movie->id ) ?? 0;
@@ -16,11 +11,10 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="pt-0">
-                        <iframe id="player" src="{{ $movie->link }}" class="video-js vjs-big-play-centered w-100" style="width: 1332px; height: 550px" frameborder="0"></iframe>
-{{--                        <video id="my-video" class="video-js vjs-big-play-centered w-100" controls preload="auto">--}}
-{{--                            <source src="{{ asset('storage') . '/' . $movie->video }}" type="video/mp4"/>--}}
-{{--                            <source src="{{ asset('storage') . '/' . $movie->video }}" type="video/webm"/>--}}
-{{--                        </video>--}}
+                        <video id="my-video" class="video-js vjs-big-play-centered w-100" controls preload="auto">
+                            <source src="https://drive.google.com/uc?export=download&id=1bvDCAAA6wBI-XWLSnv8Z5p5Q07ObbPIn" type="video/mp4"/>
+                            <source src="https://drive.google.com/uc?export=download&id=1bvDCAAA6wBI-XWLSnv8Z5p5Q07ObbPIn" type="video/webm"/>
+                        </video>
                     </div>
 
                 </div>
@@ -491,62 +485,84 @@
             });
         </script>
 
-        <script src="https://vjs.zencdn.net/7.15.4/video.js"></script>
         <script>
-            $(document).ready(function() {
-                var video = document.getElementById("my-video");
-                var lastPlayedTime = {{ $last_played_time }};
 
-                if (lastPlayedTime > 0) {
-                    video.currentTime = lastPlayedTime;
-                }
+            var video = document.getElementById("my-video");
 
-                console.log(video.currentTime);
-            });
+            video.addEventListener('pause', function() {
+                // alert('The video is paused at ' + this.currentTime + ' seconds.');
 
-            document.addEventListener("DOMContentLoaded", function () {
-                var lastPlayedTime = {{ $last_played_time }};
-                var player = videojs('my-video', {}, function onPlayerReady() {
-                    var currentTime = lastPlayedTime;
-                    var savedTime = parseFloat('{{ session('last_played_time_' . $movie->id ) }}');
-                    if (savedTime) {
-                        currentTime = savedTime;
+                $.ajax({
+                    method: 'POST',
+                    url: '{{ route('movie.playedTime', ['id' => $movie->id]) }}',
+                    data: {
+                        '_token': '{{ csrf_token() }}',
+                        'last_played_time': this.currentTime
+                    },
+                    success: function (data) {
+                        console.log(data);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        console.error(textStatus);
                     }
-
-                    player.on('loadedmetadata', function() {
-                        player.currentTime(currentTime);
-                        player.play();
-                        player.autoplay('muted');
-                    });
-
-                    player.on('pause', function () {
-                        var currentTime = player.currentTime();
-
-                        $.ajax({
-                            method: 'POST',
-                            url: '{{ route('movie.playedTime', ['id' => $movie->id]) }}',
-                            data: {
-                                '_token': '{{ csrf_token() }}',
-                                'last_played_time': currentTime
-                            },
-                            success: function (data) {
-                                console.log(data);
-                            },
-                            error: function (jqXHR, textStatus, errorThrown) {
-                                console.error(textStatus);
-                            }
-                        });
-                    });
-
                 });
-
-                {{--// Add a delay before playing the video to ensure all components are loaded--}}
-                {{--setTimeout(function(){--}}
-                {{--    var lastPlayedTime = {{ $last_played_time ?? 0 }};--}}
-                {{--    player.currentTime(lastPlayedTime);--}}
-                {{--    player.play();--}}
-                {{--}, 1000);--}}
             });
+
+            {{--$(document).ready(function() {--}}
+            {{--    var video = document.getElementById("my-video");--}}
+            {{--    var lastPlayedTime = {{ $last_played_time }};--}}
+
+            {{--    if (lastPlayedTime > 0) {--}}
+            {{--        video.currentTime = lastPlayedTime;--}}
+            {{--    }--}}
+
+            {{--    console.log(video.currentTime);--}}
+            {{--});--}}
+
+            {{--document.addEventListener("DOMContentLoaded", function () {--}}
+            {{--    var lastPlayedTime = {{ $last_played_time }};--}}
+            {{--    var player = videojs('my-video', {}, function onPlayerReady() {--}}
+            {{--        var currentTime = lastPlayedTime;--}}
+            {{--        var savedTime = parseFloat('{{ session('last_played_time_' . $movie->id ) }}');--}}
+            {{--        if (savedTime) {--}}
+            {{--            currentTime = savedTime;--}}
+            {{--        }--}}
+
+            {{--        player.on('loadedmetadata', function() {--}}
+            {{--            player.currentTime(currentTime);--}}
+            {{--            player.play();--}}
+            {{--            player.autoplay('muted');--}}
+            {{--        });--}}
+
+            {{--        player.on('pause', function () {--}}
+            {{--            console.log('Done');--}}
+            {{--            var currentTime = player.currentTime();--}}
+
+            {{--            $.ajax({--}}
+            {{--                method: 'POST',--}}
+            {{--                url: '{{ route('movie.playedTime', ['id' => $movie->id]) }}',--}}
+            {{--                data: {--}}
+            {{--                    '_token': '{{ csrf_token() }}',--}}
+            {{--                    'last_played_time': currentTime--}}
+            {{--                },--}}
+            {{--                success: function (data) {--}}
+            {{--                    console.log(data);--}}
+            {{--                },--}}
+            {{--                error: function (jqXHR, textStatus, errorThrown) {--}}
+            {{--                    console.error(textStatus);--}}
+            {{--                }--}}
+            {{--            });--}}
+            {{--        });--}}
+
+            {{--    });--}}
+
+            {{--    --}}{{--// Add a delay before playing the video to ensure all components are loaded--}}
+            {{--    --}}{{--setTimeout(function(){--}}
+            {{--    --}}{{--    var lastPlayedTime = {{ $last_played_time ?? 0 }};--}}
+            {{--    --}}{{--    player.currentTime(lastPlayedTime);--}}
+            {{--    --}}{{--    player.play();--}}
+            {{--    --}}{{--}, 1000);--}}
+            {{--});--}}
 
 
 

@@ -296,7 +296,7 @@
                                     @auth
                                         <a href="#" class="iq-user-dropdown search-toggle p-0 d-flex align-items-center"
                                            data-toggle="search-toggle">
-                                            <img src="{{ asset('front_assets/images/user/user.jpg') }}" class="img-fluid avatar-40 rounded-circle"
+                                            <img src="{{ asset('storage') . '/' . auth()->user()->image }}" class="img-fluid avatar-40 rounded-circle"
                                                  alt="user" loading="lazy">
                                         </a>
                                         <div class="iq-sub-dropdown iq-user-dropdown">

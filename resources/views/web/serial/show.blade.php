@@ -25,7 +25,7 @@
                                         <ul class="p-0 mt-2 list-inline d-flex flex-wrap movie-content">
                                             @foreach($serial->categories as $category)
                                                 <li class="trending-list">
-                                                    <a class="text-primary title" href="#">
+                                                    <a class="text-primary title" href="{{ route('category.show', ['slug' => $category->slug]) }}">
                                                         {{ $category->name }}
                                                     </a>
                                                 </li>
@@ -74,25 +74,6 @@
                                     </li>
                                     <li class="mb-0">
                                         <span><i class="ri-add-line"></i></span>
-                                    </li>
-                                </ul>
-                                <ul
-                                    class="p-0 list-inline d-flex flex-wrap align-items-center movie-content movie-space-action flex-wrap iq_tag-list">
-                                    <li class="text-primary text-lable">
-                                        <i class="fa fa-tags font-Weight-900" aria-hidden="true"></i>
-                                        TAGS:
-                                    </li>
-                                    <li>
-                                        <a class="tag-list" href="#">Brother,</a>
-                                    </li>
-                                    <li>
-                                        <a class="tag-list" href="#">
-                                            Brother Relationship,
-                                        </a>
-                                    </li>
-                                    <li> <a class="tag-list" href="tags/king.html">King,</a>
-                                    </li>
-                                    <li> <a class="tag-list" href="tags/kings.html">kings</a>
                                     </li>
                                 </ul>
                             </div>

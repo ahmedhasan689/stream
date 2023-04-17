@@ -1,11 +1,11 @@
-<x-front-layout title="{{ $category->name }}">
+<x-front-layout title="{{ $tag->name }}">
     <div class="iq-breadcrumb-one  iq-bg-over " style="background-image: url({{ asset('front_assets/images/backgroud.jpg') }});">
         <div class="container-fluid">
             <div class="row align-items-center">
                 <div class="col-sm-12">
                     <nav aria-label="breadcrumb" class="text-center iq-breadcrumb-two">
                         <h2 class="title">
-                            {{ $category->name }}
+                            {{ $tag->name }}
                         </h2>
                         <ol class="breadcrumb main-bg">
                             <li class="breadcrumb-item">
@@ -13,7 +13,7 @@
                                     Home
                                 </a>
                             </li>
-                            <li class="breadcrumb-item active">Movie</li>
+                            <li class="breadcrumb-item active">Tags</li>
                         </ol>
                     </nav>
                 </div>
@@ -24,7 +24,7 @@
     <main id="main" class="site-main">
         <div class="container-fluid">
             <ul class=" row list-inline  mb-0 iq-rtl-direction">
-                @foreach( $category->movies as $movie )
+                @foreach( $tag->movies as $movie )
                     <li class="slide-item col-lg-3 mb-4">
                         <div class="block-images position-relative">
                             <div class="img-box">

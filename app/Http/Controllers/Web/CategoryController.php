@@ -29,7 +29,6 @@ class CategoryController extends Controller
     public function show($slug): Application|Factory|View
     {
         $category = Category::where('slug', $slug)->first();
-
         return view('web.category.show', compact('category'));
     }
 }

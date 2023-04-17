@@ -60,7 +60,7 @@
                                                 <span class="text-body">
                                                     @foreach( $slider_movie->categories as $category )
                                                         <a href="{{ route('category.show', ['slug' => $category->slug]) }}">
-                                                            {{ $category->name }}
+                                                            {{ $category->name .' ,'}}
                                                         </a>
                                                     @endforeach
                                                 </span>

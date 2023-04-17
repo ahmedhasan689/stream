@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Web\AccountController;
+use App\Http\Controllers\Web\ActorController;
 use App\Http\Controllers\Web\BlogsController;
 use App\Http\Controllers\Web\CategoryController;
 use App\Http\Controllers\Web\EpisodeController;
@@ -201,5 +202,22 @@ Route::middleware(['auth'])->group(function() {
         });
     // End Watch List Route
 
+    // Start Tag Controller
+    Route::controller(TagsController::class)
+        ->prefix('tags')
+        ->as('tag.')
+        ->group(function() {
+            Route::get('/{slug}', 'show')->name('show');
+        });
+    // Start End Controller
+
+    // Start Actor Controller
+    Route::controller(ActorController::class)
+        ->prefix('actors')
+        ->as('actor.')
+        ->group(function() {
+            Route::get('/{slug}', 'show')->name('show');
+        });
+    // Start Actor Controller
 
 });

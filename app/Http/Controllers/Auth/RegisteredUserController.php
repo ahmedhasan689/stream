@@ -53,7 +53,7 @@ class RegisteredUserController extends Controller
             'email.unique' => 'This email address is already in use.',
             'password.required' => 'Please enter a password.',
             'password.confirmed' => 'Your passwords do not match.',
-            'password.regex' => 'The password format is invalid.',
+            'password.regex' => 'The password must contain letters, numbers, and symbols.',
             'gender.required' => 'Please select your gender.',
             'date_of_birth.required' => 'Please enter your date of birth.',
         ]
