@@ -49,7 +49,7 @@
                                                 Starring:
                                                 <span class="text-body">
                                                     @foreach( $slider_movie->actors as $actor )
-                                                        <a href="cast-karen-gilchrist.html">
+                                                        <a href="{{ route('actor.show', ['id' => $actor->id]) }}">
                                                             {{ $actor->name }}
                                                         </a>
                                                     @endforeach
@@ -69,7 +69,7 @@
                                                 Tag:
                                                 <span class="text-body">
                                                     @foreach( $slider_movie->tags as $tag )
-                                                        <a href="#">
+                                                        <a href="{{ route('tag.show', ['slug' => $tag->slug]) }}">
                                                             {{ $tag->name }}
                                                         </a>
                                                     @endforeach
