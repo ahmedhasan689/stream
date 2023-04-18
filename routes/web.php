@@ -216,7 +216,7 @@ Route::middleware(['auth'])->group(function() {
         ->prefix('actors')
         ->as('actor.')
         ->group(function() {
-            Route::get('/{slug}', 'show')->name('show');
+            Route::get('/{id}', 'show')->name('show');
         });
     // Start Actor Controller
 

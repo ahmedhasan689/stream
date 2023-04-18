@@ -162,15 +162,15 @@
                             </div>
                             <div class="favorites-contens iq-smovie-slider">
                                 <ul class="inner-slider list-inline row p-0  iq-ltr-direction">
-                                    @foreach($serial->actors as $actor)
+                                    @foreach( $serial->actors as $actor )
                                         <li class=" slide-item iq-ltr-direction col-xl-3 col-lg-4 col-md-4 col-6">
                                             <div class="cast-images position-relative row mx-0">
                                                 <div class="col-sm-4 col-12 img-box p-0">
-                                                    <img src="{{ asset('front_assets/images/genre/43.jpg') }}" class="person__poster--image img-fluid" alt="image" loading="lazy">
+                                                    <img src="{{ asset('storage') . '/' . $actor->image }}" class="person__poster--image img-fluid" alt="image" loading="lazy">
                                                 </div>
                                                 <div class="col-sm-8 col-12 block-description starring-desc ">
                                                     <h6 class="iq-title">
-                                                        <a href="#" tabindex="0">
+                                                        <a href="{{ route('actor.show', ['id' => $actor->id]) }}" tabindex="0">
                                                             {{ $actor->name }}
                                                         </a>
                                                     </h6>
