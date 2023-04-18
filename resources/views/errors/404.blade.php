@@ -4,7 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Streamit  - Responsive Bootstrap 4 Admin Dashboard Template</title>
+    <title>Streamit 404</title>
     <!-- Favicon -->
     <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}" />
     <!-- Bootstrap CSS -->
@@ -29,7 +29,7 @@
         <div class="row no-gutters height-self-center">
             <div class="col-sm-12 text-center align-self-center">
                 <div class="iq-error position-relative">
-                    <img src="{{ asset('assets/images/404.jpeg') }}" class="img-fluid iq-error-img" alt="">
+                    <img src="{{ asset('assets/images/404.png') }}" class="img-fluid iq-error-img" alt="">
                     <h2 class="mb-0 mt-4">Oops! This Page is Not Found.</h2>
                     <p>The requested page does not exist.</p>
                     <a class="btn btn-primary mt-3" href="{{ route('home') }}">
@@ -41,6 +41,7 @@
         </div>
     </div>
 </div>
+
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="{{ asset('assets/js/jquery.min.js') }}"></script>

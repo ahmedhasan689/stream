@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Blog;
 //use App\Nova\Blog;
 use App\Observers\BlogObserver;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Gate;
 use Laravel\Nova\Nova;
 use Laravel\Nova\NovaApplicationServiceProvider;
@@ -22,6 +23,16 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
 
         Nova::serving(function () {
             Blog::observe(BlogObserver::class);
+        });
+        Nova::footer(function ($request) {
+            return Blade::render('
+            <div style="text-align:center">
+                <strong>
+                    {{ date("Y") }} &copy;
+                    <a  target="_blank" :text="Streamit Co." />
+                </strong>
+                @lang("Streamit Co.")
+            </div>');
         });
     }
 
