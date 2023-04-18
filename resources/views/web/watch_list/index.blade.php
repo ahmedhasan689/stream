@@ -1,6 +1,6 @@
 <x-front-layout title="Watch List">
     <!-- MainContent -->
-    <div class="iq-breadcrumb-one  iq-bg-over " style="background-image: url({{ asset('front_assets/images/video/bg.jpg') }});">
+    <div class="iq-breadcrumb-one  iq-bg-over " style="background-image: url({{ asset('front_assets/images/backgroud.jpg') }});">
         <div class="container-fluid">
             <div class="row align-items-center">
                 <div class="col-sm-12">
