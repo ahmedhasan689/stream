@@ -75,7 +75,7 @@
                                     </li>
                                     @foreach( $movie->tags as $tag )
                                         <li class="trending-list mr-3">
-                                            <a class="title" href="#">
+                                            <a class="title" href="{{ route('tag.show', ['slug' => $tag->slug]) }}">
                                                 {{ $tag->name }}
                                             </a>
                                         </li>
