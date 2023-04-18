@@ -9,7 +9,7 @@
                     <ul class=" row mb-0 list-inline">
                         @foreach( $tags as $tag )
                             <li class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
-                                <a href="#">
+                                <a href="{{ route('tag.show', ['slug' => $tag->slug]) }}">
                                     <div class="iq-tag-box watchlist-first">
                                         <span class="iq-tag ">{{ $tag->name }}</span>
                                     </div>
