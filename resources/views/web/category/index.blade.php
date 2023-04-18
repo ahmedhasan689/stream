@@ -24,12 +24,6 @@
                             </li>
                         @endforeach
                     </ul>
-                    @if( $categories->count() > 8 )
-                        <button class="btn btn-hover hide-me" type="button" data-toggle="collapse" data-target="#collapseExample1"
-                                aria-expanded="false" aria-controls="collapseExample1">
-                            <span class="genres-btn">LOAD MORE</span>
-                        </button>
-                    @endif
                 </div>
             </section>
         @endif
@@ -58,43 +52,6 @@
                             </li>
                         @endforeach
                     </ul>
-                    @if( $serial_categories->count() > 8 )
-                        <button class="btn btn-hover hide-me" type="button" data-toggle="collapse" data-target="#collapseExample2"
-                                aria-expanded="false" aria-controls="collapseExample2">
-                            <span class="genres-btn">LOAD MORE</span>
-                        </button>
-                    @endif
-                    <div class="collapse" id="collapseExample2">
-                        <ul class=" row list-inline  mb-0 iq-rtl-direction iq_genres-contents">
-                            <li class="slide-item col-lg-3 col-md-4 col-sm-6">
-                                <div class="block-images position-relative  watchlist-first">
-                                    <div class="img-box">
-                                        <img src="{{ asset('front_assets/images/genre/44.jpg') }}" class="img-fluid" loading="lazy" alt="">
-                                    </div>
-                                    <div class="block-description d-flex justify-content-center flex-column text-center">
-                                        <h6 class="iq-title"><a href="#">Action</a></h6>
-                                    </div>
-                            </li>
-                            <li class="slide-item col-lg-3 col-md-4 col-sm-6">
-                                <div class="block-images position-relative">
-                                    <div class="img-box">
-                                        <img src="{{ asset('front_assets/images/genre/24.jpg') }}" class="img-fluid" loading="lazy" alt="">
-                                    </div>
-                                    <div class="block-description d-flex justify-content-center flex-column text-center">
-                                        <h6 class="iq-title"><a href="#">Adventure</a></h6>
-                                    </div>
-                            </li>
-                            <li class="slide-item col-lg-3 col-md-4 col-sm-6">
-                                <div class="block-images position-relative">
-                                    <div class="img-box">
-                                        <img src="{{ asset('front_assets/images/genre/48.jpg') }}" class="img-fluid" loading="lazy" alt="">
-                                    </div>
-                                    <div class="block-description d-flex justify-content-center flex-column text-center">
-                                        <h6 class="iq-title"><a href="#">Comedy</a></h6>
-                                    </div>
-                            </li>
-                        </ul>
-                    </div>
                 </div>
             </section>
         @endif
