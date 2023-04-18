@@ -134,18 +134,15 @@
                             <li class=" slide-item iq-ltr-direction col-xl-3 col-lg-4 col-md-4 col-6">
                                 <div class="cast-images position-relative row mx-0">
                                     <div class="col-sm-4 col-12 img-box p-0">
-                                        <img src="{{ asset('front_assets/images\genre\43.jpg') }}"
+                                        <img src="{{ asset('storage') . '/' . $actor->image}}"
                                              class="person__poster--image img-fluid" alt="image" loading="lazy">
                                     </div>
                                     <div class="col-sm-8 col-12 block-description starring-desc ">
                                         <h6 class="iq-title">
-                                            <a href="#" tabindex="0">
+                                            <a href="{{ route('actor.show', ['id' => $actor->id]) }}" tabindex="0">
                                                 {{ $actor->name }}
                                             </a>
                                         </h6>
-                                        <div class="video-time d-flex align-items-center my-2">
-                                            <span class="text-white">As James</span>
-                                        </div>
                                     </div>
                                 </div>
                             </li>
