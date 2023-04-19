@@ -83,7 +83,7 @@
                                         </li>
                                         @foreach( $blog->tags as $tag )
                                             <li>
-                                                <a href="#">
+                                                <a href="{{ route('tag.show', ['slug' => $tag->slug]) }}">
                                                     {{ $tag->name }}
                                                 </a>
                                             </li>
@@ -163,25 +163,20 @@
                                 @endforeach
                             </ul>
                         </div>
-                        <div id="tag_cloud-2" class="widget widget_tag_cloud"><h5 class="widget-title">Tags</h5><div class="tagcloud">
+                        <div id="tag_cloud-2" class="widget widget_tag_cloud">
+                            <h5 class="widget-title">
+                                Tags
+                            </h5>
+                            <div class="tagcloud">
                                 <ul class="wp-tag-cloud" >
-                                    <li><a href="#" class="tag-cloud-link " >Action</a></li>
-                                    <li><a href="#" class="tag-cloud-link ">Comedies</a></li>
-                                    <li><a href="#" class="tag-cloud-link ">comedy</a></li>
-                                    <li><a href="#" class="tag-cloud-link ">Drama</a></li>
-                                    <li><a href="#" class="tag-cloud-link ">Dramas</a></li>
-                                    <li><a href="#" class="tag-cloud-link ">Historical</a></li>
-                                    <li><a href="#" class="tag-cloud-link ">horr</a></li>
-                                    <li><a href="#" class="tag-cloud-link ">Horror</a></li>
-                                    <li><a href="#" class="tag-cloud-link ">Movie</a></li>
-                                    <li><a href="#" class="tag-cloud-link">Movie Trailers</a></li>
-                                    <li><a href="#" class="tag-cloud-link">Mystery</a></li>
-                                    <li><a href="#" class="tag-cloud-link">Rumors</a></li>
-                                    <li><a href="#" class="tag-cloud-link">thrill</a></li>
-                                    <li><a href="#" class="tag-cloud-link">Thriller</a></li>
-                                    <li><a href="#" class="tag-cloud-link">Trailers</a></li>
-                                    <li><a href="#" class="tag-cloud-link ">Tv Rumors</a></li>
-                                    <li><a href="#" class="tag-cloud-link">TV Series</a></li>
+                                    @foreach( $tags as $tag )
+                                        <li>
+                                            <a href="{{ route('tag.show', ['slug' => $tag->slug]) }}" class="tag-cloud-link " >
+                                                {{ $tag->name }}
+                                            </a>
+                                        </li>
+                                    @endforeach
+
                                 </ul>
                             </div>
                         </div>

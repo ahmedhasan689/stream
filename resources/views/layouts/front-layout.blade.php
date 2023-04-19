@@ -408,7 +408,7 @@
                             <ul id="menu-footer-link-1" class="menu p-0">
                                 <li id="menu-item-7314"
                                     class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7314">
-                                    <a href="#">Terms Of Use</a>
+                                    <a href="{{ route('page.pricing') }}">Pricing</a>
                                 </li>
                                 <li id="menu-item-7316"
                                     class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7316">

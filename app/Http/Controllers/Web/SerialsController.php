@@ -52,7 +52,11 @@ class SerialsController extends Controller
                 $query->where('user_id', Auth::id());
             })->whereHas('season')->withCount('user_views')->where('status', 1)->get();
 
-        return view('web.serial.index', compact('serials', 'like_exists', 'playlist_exists', 'latest_serials', 'popular_serials', 'liked_episodes', 'viewed_episodes', 'top_serials', 'recommended_episodes'));
+        $episode_points = Episode::query()->whereHas('user_points', function($query) {
+            $query->where('user_id', Auth::id());
+        })->get();
+
+        return view('web.serial.index', compact('serials', 'like_exists', 'playlist_exists', 'latest_serials', 'popular_serials', 'liked_episodes', 'viewed_episodes', 'top_serials', 'recommended_episodes', 'episode_points'));
     }
 
     /**

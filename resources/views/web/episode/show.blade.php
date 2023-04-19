@@ -6,18 +6,18 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="pt-0">
-                        <iframe id="player" src="{{ $episode->link }}" class="video-js vjs-big-play-centered w-100" style="width: 1332px; height: 550px" frameborder="0"></iframe>
+{{--                        <iframe id="player" src="{{ $episode->link }}" class="video-js vjs-big-play-centered w-100" style="width: 1332px; height: 550px" frameborder="0"></iframe>--}}
 
-                        {{--                        <video--}}
-{{--                            id="my-video"--}}
-{{--                            class="video-js vjs-big-play-centered w-100"--}}
-{{--                            controls--}}
-{{--                            preload="auto"--}}
-{{--                        >--}}
-{{--                            <source src="{{ asset('storage') . '/' . $episode->video }}" type="video/mp4" />--}}
-{{--                            <source src="{{ asset('storage') . '/' . $episode->video }}" type="video/webm" />--}}
+                        <video
+                            id="my-video"
+                            class="video-js vjs-big-play-centered w-100"
+                            controls
+                            preload="auto"
+                        >
+                            <source src="{{ $episode->video }}" type="video/mp4" />
+                            <source src="{{ $episode->video }}" type="video/webm" />
 
-{{--                        </video>--}}
+                        </video>
                     </div>
 
                 </div>
@@ -253,6 +253,28 @@
                         })
                     }
                 })
+            });
+        </script>
+        <script>
+            var video = document.getElementById("my-video");
+
+            video.addEventListener('pause', function() {
+                // alert('The video is paused at ' + this.currentTime + ' seconds.');
+
+                $.ajax({
+                    method: 'POST',
+                    url: '{{ route('episode.playedTime', ['id' => $episode->id]) }}',
+                    data: {
+                        '_token': '{{ csrf_token() }}',
+                        'last_played_time': this.currentTime
+                    },
+                    success: function (data) {
+                        console.log(data);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        console.error(textStatus);
+                    }
+                });
             });
         </script>
     @endsection

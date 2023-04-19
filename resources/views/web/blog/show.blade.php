@@ -134,7 +134,7 @@
                                 <ul class="wp-tag-cloud">
                                     @foreach( $tags as $tag )
                                         <li>
-                                            <a href="#" class="tag-cloud-link">
+                                            <a href="{{ route('tag.show', ['slug' => $tag->slug]) }}" class="tag-cloud-link">
                                                 {{ $tag->name }}
                                             </a>
                                         </li>

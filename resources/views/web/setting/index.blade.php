@@ -10,7 +10,6 @@
                         <h4 class="mb-3">
                             {{ $user->name }}
                         </h4>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
                         <a href="#" class="edit-icon text-primary">Edit</a>
                     </div>
                 </div>
@@ -114,6 +113,20 @@
                         console.log(data);
                     },
                 });
+            })
+        </script>
+
+        <script>
+            $(document).on('click', '.showLogoutForm', function(e) {
+                e.preventDefault();
+
+                $('#logoutForm').removeClass('d-none');
+            });
+
+            $(document).on('click', '.hideLogoutForm', function(e) {
+                e.preventDefault();
+
+                $('#logoutForm').addClass('d-none');
             })
         </script>
     @endsection

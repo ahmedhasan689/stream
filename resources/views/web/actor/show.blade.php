@@ -6,11 +6,6 @@
                     <img src="{{ asset('storage') . '/' . $actor->image }}" class="img-fluid" alt="" loading="lazy">
                     <div class="align-items-center trending-list flex-wrap">
                         <h3 class="trending-text text-capitalize mt-5 mb-3">Personal Info</h3>
-                        <div class="list-inline p-0 mb-4 share-icons music-play-lists profile-social-lists">
-                            <a href="#" class="share-ico  text-primary mr-2"><i class="ri-facebook-fill"></i></a>
-                            <a href="#" target="_blank" rel="noopener noreferrer" class="share-ico text-primary  mr-2"><i class="ri-twitter-fill"></i></a>
-                            <a href="#" data-link="#" class="share-ico iq-copy-link mr-2 text-primary "><i class="ri-links-fill"></i></a>
-                        </div>
                     </div>
                     <div class="person-details">
                         <div class="">

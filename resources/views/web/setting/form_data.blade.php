@@ -50,15 +50,6 @@
             <a href="#" class="text-primary">Change</a>
         </div>
     </div>
-    <div class="row align-items-center justify-content-between">
-        <div class="col-md-8">
-            <span class="text-light font-size-13">Language</span>
-            <p class="mb-0">English</p>
-        </div>
-        <div class="col-md-4 text-md-right text-left">
-            <a href="#" class="text-primary">Change</a>
-        </div>
-    </div>
     <h5 class="mb-3 mt-4 pb-3 a-border">Billing Details</h5>
     <div class="row justify-content-between mb-3">
         <div class="col-md-8 r-mb-15">
@@ -82,8 +73,28 @@
     <div class="row">
         <div class="col-12 setting">
             <a href="#" class="text-body d-block mb-1">Recent device streaming activity</a>
-            <a href="#" class="text-body d-block mb-1">Sign out of all devices </a>
-            <a href="#" class="text-body d-block">Download your person information</a>
+
+            <a href="#" class="text-body d-block mb-1 showLogoutForm">Sign out of all devices </a>
+
+            <form action="{{ route('logoutOtherDevice') }}" method="POST" id="logoutForm" class="my-4 d-none">
+                @csrf
+
+                <input type="password" name="password" placeholder="Enter Password To Confirm" class="@error('password') is-invalid @enderror">
+                @error('password')
+                    <span class="text-danger">
+                        {{ $message }}
+                    </span>
+                @enderror
+                <div class="my-3">
+                    <button type="submit" class="btn btn-success">
+                        Sure
+                    </button>
+                    <button type="button" class="btn btn-dark hideLogoutForm">
+                        Close
+                    </button>
+                </div>
+            </form>
+
         </div>
     </div>
 </div>

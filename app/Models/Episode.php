@@ -107,4 +107,11 @@ class Episode extends Model
             ->as('episode_views');
     }
 
+    public function user_points()
+    {
+        return $this->belongsToMany(User::class, 'episode_points', 'episode_id', 'user_id')
+            ->using(EpisodePoint::class)
+            ->as('episode_points');
+    }
+
 }

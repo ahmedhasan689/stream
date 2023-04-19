@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use App\Models\Episode;
+use App\Models\EpisodePoint;
 use App\Models\EpisodeUser;
 use App\Models\EpisodeUserPlaylist;
 use App\Models\EpisodeView;
@@ -34,6 +35,10 @@ class EpisodeController extends Controller
 
         $view_exists = EpisodeView::where('episode_id', $episode->id)->where('user_id', Auth::id())->exists();
 
+        $episode_points = Episode::query()->whereHas('user_points', function($query) {
+            $query->where('user_id', Auth::id());
+        })->get();
+
         if( !$view_exists ) {
             EpisodeView::create([
                 'episode_id' => $episode->id,
@@ -42,10 +47,35 @@ class EpisodeController extends Controller
         }
 
         if( $request->ajax() ) {
-            return view('web.episode._icons', compact('episode', 'other_episodes', 'playlist_exists', 'like_exists'))->render();
+            return view('web.episode._icons', compact('episode', 'other_episodes', 'playlist_exists', 'like_exists', 'episode_points'))->render();
         }
 
-        return view('web.episode.show', compact('episode', 'other_episodes', 'playlist_exists', 'like_exists'));
+        return view('web.episode.show', compact('episode', 'other_episodes', 'playlist_exists', 'like_exists', 'episode_points'));
+    }
+
+    /**
+     * @param Request $request
+     * @param $id
+     * @return void
+     */
+    public function playedTime(Request $request, $id)
+    {
+        $episode = Episode::query()->findOrFail($id);
+
+        $episode_exists = EpisodePoint::query()->where('episode_id', $episode->id)->where('user_id', Auth::id())->first();
+
+        if( !$episode_exists ) {
+            EpisodePoint::create([
+                'user_id' => Auth::id(),
+                'episode_id' => $episode->id,
+                'point' => $request->last_played_time
+            ]);
+
+        }else{
+            $episode_exists->update([
+                'point' => $request->last_played_time,
+            ]);
+        }
     }
 
     /**

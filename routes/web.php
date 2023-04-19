@@ -40,10 +40,10 @@ use Illuminate\Support\Facades\Route;
 
 require __DIR__.'/auth.php';
 
-Route::middleware(['auth'])->group(function() {
+Route::middleware(['auth', 'email_verified'])->group(function() {
 
     // Start Home Route
-    Route::get('/', [HomeController::class, 'index'])->name('home')->withoutMiddleware(['auth']);
+    Route::get('/', [HomeController::class, 'index'])->name('home')->withoutMiddleware(['auth', 'email_verified']);
     // End Home Route
 
     // Start Account Route
@@ -129,6 +129,7 @@ Route::middleware(['auth'])->group(function() {
         ->as('episode.')
         ->group(function() {
             Route::get('/{slug}', 'show')->name('show');
+            Route::post('/save_played_time/{id}', 'playedTime')->name('playedTime');
             Route::get('view_all/{type}', 'viewAll')->name('viewAll');
         });
     // End Episode Route

@@ -48,12 +48,15 @@ class MovieController extends Controller
             })->withCount('user_views')->where('status', 1)->get();
 
 
+        $movie_points = Movie::query()->whereHas('user_points', function($query) {
+            $query->where('user_id', Auth::id());
+        })->get();
 
         if( $request->ajax() ) {
-            return view('web.movie.content', compact('latest_movies',  'like_exists', 'recommended_movies', 'liked_movies', 'top_movies', 'popular_movies', 'playlist_exists'))->render();
+            return view('web.movie.content', compact('latest_movies',  'like_exists', 'recommended_movies', 'liked_movies', 'top_movies', 'popular_movies', 'playlist_exists', 'movie_points'))->render();
         }
 
-        return view('web.movie.index', compact('latest_movies', 'like_exists','recommended_movies', 'top_movies', 'liked_movies', 'popular_movies', 'playlist_exists'));
+        return view('web.movie.index', compact('latest_movies', 'like_exists','recommended_movies', 'top_movies', 'liked_movies', 'popular_movies', 'playlist_exists', 'movie_points'));
     }
 
     /**
