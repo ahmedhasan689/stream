@@ -18,10 +18,14 @@ class CheckEmailVerifiedMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if( !auth()->user()->email_verified_at ) {
-            toastr()->error('Please Verify Your Email Before Using Our Website');
-            return redirect()->route('home');
+        if( auth()->check() ) {
+            if( !auth()->user()->email_verified_at ) {
+                toastr()->error('Please Verify Your Email Before Using Our Website');
+                return redirect()->route('home');
+            }
+            return $next($request);
         }
-        return $next($request);
+        toastr()->error('Please Verify Your Email Before Using Our Website');
+        return redirect()->route('home');
     }
 }
