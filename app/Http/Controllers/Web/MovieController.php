@@ -115,7 +115,7 @@ class MovieController extends Controller
                 'user_id' => Auth::id()
             ]);
         }
-        $data['last_played_time'] = session('last_played_time_'.$data['movie']->id) ?? 0;
+        $data['movie_point'] = MoviePoint::where('movie_id', $data['movie']->id)->where('user_id', Auth::id())->first();
 
         if( $request->ajax() ) {
             return view('web.movie._icons', $data)->render();

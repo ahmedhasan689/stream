@@ -486,6 +486,10 @@
 
             var video = document.getElementById("my-video");
 
+            document.getElementById('my-video').addEventListener('loadedmetadata', function() {
+                this.currentTime = {{ $movie_point->point }};
+            }, false);
+
             video.addEventListener('pause', function() {
                 // alert('The video is paused at ' + this.currentTime + ' seconds.');
 

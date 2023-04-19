@@ -46,11 +46,13 @@ class EpisodeController extends Controller
             ]);
         }
 
+        $episode_point = EpisodePoint::where('episode_id', $episode->id)->where('user_id', Auth::id())->first();
+
         if( $request->ajax() ) {
-            return view('web.episode._icons', compact('episode', 'other_episodes', 'playlist_exists', 'like_exists', 'episode_points'))->render();
+            return view('web.episode._icons', compact('episode', 'other_episodes', 'playlist_exists', 'like_exists', 'episode_points', 'episode_point'))->render();
         }
 
-        return view('web.episode.show', compact('episode', 'other_episodes', 'playlist_exists', 'like_exists', 'episode_points'));
+        return view('web.episode.show', compact('episode', 'other_episodes', 'playlist_exists', 'like_exists', 'episode_points', 'episode_point'));
     }
 
     /**
