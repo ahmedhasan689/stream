@@ -487,7 +487,7 @@
             var video = document.getElementById("my-video");
 
             document.getElementById('my-video').addEventListener('loadedmetadata', function() {
-                this.currentTime = {{ $movie_point->point }};
+                this.currentTime = {{ $movie_point->point ?? 0 }};
             }, false);
 
             video.addEventListener('pause', function() {
