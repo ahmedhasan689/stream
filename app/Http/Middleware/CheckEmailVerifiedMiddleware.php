@@ -16,8 +16,10 @@ class CheckEmailVerifiedMiddleware
      * @param Closure(Request): (Response|RedirectResponse) $next
      * @return string
      */
-    public function handle(Request $request, Closure $next)
+
+    public function handle($request, Closure $next)
     {
+
         if( auth()->check() ) {
             if( !auth()->user()->email_verified_at ) {
                 toastr()->error('Please Verify Your Email Before Using Our Website');
