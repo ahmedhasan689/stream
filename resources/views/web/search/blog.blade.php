@@ -103,7 +103,7 @@
                 <div class="col-lg-4 col-sm-12">
                     <div class="widget-area" >
                         <div id="search-2" class="widget widget_search">
-                            <form method="POST" class="search-form" action="{{ route('searchBlog') }}" autocomplete="off">
+                            <form method="get" class="search-form" action="{{ route('searchBlog') }}" autocomplete="off">
                                 @csrf
 
                                 <label >

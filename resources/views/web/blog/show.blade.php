@@ -70,11 +70,12 @@
                 <div class="col-lg-4 col-sm-12">
                     <div class="widget-area" >
                         <div id="search-2" class="widget widget_search">
-                            <form method="get" class="search-form" action="#" autocomplete="off">
+                            <form method="POST" class="search-form" action="{{ route('searchBlog') }}" autocomplete="off">
+                                @csrf
                                 <label >
                                     <span class="input-group screen-reader-text">Search for:</span>
                                 </label>
-                                <input type="search" class="search-field search__input"  placeholder="Search" value="" name="s">
+                                <input type="search" class="search-field search__input"  placeholder="Search" value="" name="title">
                                 <button type="submit" class="search-submit">
                                     <i class="ri-search-line"></i>
                                     <span class="screen-reader-text">Search</span>

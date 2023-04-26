@@ -224,6 +224,7 @@ Route::middleware(['auth', 'email_verified'])->group(function() {
 
     // Start Search Route
     Route::post('/search', [SearchController::class, 'search'])->name('search');
+    Route::post('/search-blog', [SearchController::class, 'searchBlog'])->name('searchBlog');
     // End Search Route
 
 });
