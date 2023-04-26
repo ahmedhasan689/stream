@@ -12,8 +12,8 @@
                 <div class="col-lg-12">
                     <div class="pt-0">
                         <video id="my-video" class="video-js vjs-big-play-centered w-100" controls preload="auto">
-                            <source src="https://drive.google.com/uc?export=download&id=1bvDCAAA6wBI-XWLSnv8Z5p5Q07ObbPIn" type="video/mp4"/>
-                            <source src="https://drive.google.com/uc?export=download&id=1bvDCAAA6wBI-XWLSnv8Z5p5Q07ObbPIn" type="video/webm"/>
+                            <source src="{{ $movie->video }}" type="video/mp4"/>
+                            <source src="{{ $movie->video }}" type="video/webm"/>
                         </video>
                     </div>
 
@@ -83,7 +83,7 @@
                                 </ul>
                             </div>
                             <div class="trailor-video col-md-3 col-12 mt-lg-0 mt-4 mb-md-0 mb-1 text-lg-right">
-                                <a href="{{ asset('storage') . '/' . $movie->trailer }}"
+                                <a href="{{ $movie->trailer }}"
                                    class="video-open playbtn block-images position-relative playbtn_thumbnail">
                                     <img width="1920" height="1080" src="{{ asset('storage') . '/' . $movie->image }}"
                                          class="attachment-medium-large size-medium-large wp-post-image" alt=""

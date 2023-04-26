@@ -87,6 +87,7 @@
                             <div class="col-sm-12 overflow-hidden">
                                 <div class="d-flex align-items-center justify-content-between">
                                     <h4 class="main-title">Keep Watching</h4>
+                                    <a href="{{ route('episode.viewAll', ['type' => 'keep_watch']) }}" class="text-primary iq-view-all">View All</a>
                                 </div>
                             </div>
                         </div>

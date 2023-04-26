@@ -176,16 +176,12 @@ class MovieController extends Controller
                 'point' => $request->last_played_time,
             ]);
         }
-
-
-//        $last_played_time = $request->last_played_time;
-//        $request->session()->put('last_played_time_'.$movie->id , $last_played_time);
-//        return response()->json([
-//            'status' => session('last_played_time_'.$movie->id),
-//        ]);
-
     }
 
+    /**
+     * @param $type
+     * @return Application|Factory|View|void
+     */
     public function viewAll($type)
     {
         $pageTitle = null;
@@ -196,6 +192,16 @@ class MovieController extends Controller
         $like_exists = MovieUser::query()->where('user_id', Auth::id())->pluck('movie_id')->toArray();
 
         switch ($type) {
+            case 'keep_watch':
+                $pageTitle = 'Keep Watching';
+                $data = Movie::query()->whereHas('user_points', function($query) {
+                    $query->where('user_id', Auth::id());
+                })->where('status', 1)->get();
+
+                return view('web.movie.view_all', compact('pageTitle', 'data', 'playlist_exists' , 'like_exists'));
+
+                break;
+
             case 'top_movie':
                 $pageTitle = 'Top Rated Movies';
                 $data = Movie::query()->orderBy('evaluation', 'desc')->where('status', 1)->get();

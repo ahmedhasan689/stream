@@ -27,7 +27,6 @@ class CheckEmailVerifiedMiddleware
             }
             return $next($request);
         }
-        toastr()->error('Please Verify Your Email Before Using Our Website');
-        return redirect()->route('home');
+        return redirect()->route('login');
     }
 }

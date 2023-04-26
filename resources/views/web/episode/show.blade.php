@@ -7,7 +7,6 @@
                 <div class="col-lg-12">
                     <div class="pt-0">
 {{--                        <iframe id="player" src="{{ $episode->link }}" class="video-js vjs-big-play-centered w-100" style="width: 1332px; height: 550px" frameborder="0"></iframe>--}}
-
                         <video
                             id="my-video"
                             class="video-js vjs-big-play-centered w-100"
@@ -85,7 +84,7 @@
                                     </ul>
                                 </div>
                                 <div class="trailor-video col-md-3 col-12 mt-lg-0 mt-4 mb-md-0 mb-1 text-lg-right">
-                                    <a href="{{ asset('storage') . '/' . $episode->trailer }}"
+                                    <a href="{{ $episode->trailer }}"
                                        class="video-open playbtn block-images position-relative playbtn_thumbnail">
                                         <img width="1920" height="1080" src="{{ asset('storage') . '/' . $episode->image }}"
                                              class="attachment-medium-large size-medium-large wp-post-image" alt="" loading="lazy"
@@ -260,7 +259,7 @@
 
 
             document.getElementById('my-video').addEventListener('loadedmetadata', function() {
-                this.currentTime = {{ $episode_point->point }};
+                this.currentTime = {{ $episode_point->point ?? '0' }};
             }, false);
 
             video.addEventListener('pause', function() {

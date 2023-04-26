@@ -12,6 +12,7 @@ use App\Http\Controllers\Web\MovieLikeController;
 use App\Http\Controllers\Web\MoviePlaylistController;
 use App\Http\Controllers\Web\PagesController;
 use App\Http\Controllers\Web\EpisodePlaylistController;
+use App\Http\Controllers\Web\SearchController;
 use App\Http\Controllers\Web\SerialLikeController;
 use App\Http\Controllers\Web\SerialsController;
 use App\Http\Controllers\Web\SettingsController;
@@ -60,7 +61,7 @@ Route::middleware(['auth', 'email_verified'])->group(function() {
     Route::controller(PagesController::class)
         ->prefix('stream-it')
         ->as('page.')
-        ->withoutMiddleware(['auth'])
+        ->withoutMiddleware(['auth', 'email_verified'])
         ->group(function() {
             Route::get('/about-us', 'aboutUs')->name('about-us');
             Route::get('/contact-us', 'contactUs')->name('contact-us');
@@ -85,7 +86,7 @@ Route::middleware(['auth', 'email_verified'])->group(function() {
         ->prefix('categories')
         ->as('category.')
         ->group(function() {
-            Route::get('/', 'index')->name('index')->withoutMiddleware(['auth']);
+            Route::get('/', 'index')->name('index')->withoutMiddleware(['auth', 'email_verified']);
             Route::get('/{slug}', 'show')->name('show');
         });
     // End Category Route
@@ -95,7 +96,7 @@ Route::middleware(['auth', 'email_verified'])->group(function() {
         ->prefix('blogs')
         ->as('blog.')
         ->group(function() {
-            Route::get('/', 'index')->name('index')->withoutMiddleware(['auth']);
+            Route::get('/', 'index')->name('index')->withoutMiddleware(['auth', 'email_verified']);
             Route::get('/{slug}', 'show')->name('show');
         });
     // End Blog Route
@@ -105,7 +106,7 @@ Route::middleware(['auth', 'email_verified'])->group(function() {
         ->prefix('movies')
         ->as('movie.')
         ->group(function() {
-            Route::get('/', 'index')->name('index')->withoutMiddleware(['auth']);
+            Route::get('/', 'index')->name('index')->withoutMiddleware(['auth', 'email_verified']);
             Route::get('/{slug}', 'show')->name('show');
             Route::post('/save_played_time/{id}', 'playedTime')->name('playedTime');
             Route::get('/view_all/{type}', 'viewAll')->name('viewAll');
@@ -117,7 +118,7 @@ Route::middleware(['auth', 'email_verified'])->group(function() {
         ->prefix('serials')
         ->as('serial.')
         ->group(function() {
-            Route::get('/', 'index')->name('index')->withoutMiddleware(['auth']);
+            Route::get('/', 'index')->name('index')->withoutMiddleware(['auth', 'email_verified']);
             Route::get('/{slug}', 'show')->name('show');
             Route::get('view_all/{type}', 'viewAll')->name('viewAll');
         });
@@ -220,5 +221,9 @@ Route::middleware(['auth', 'email_verified'])->group(function() {
             Route::get('/{id}', 'show')->name('show');
         });
     // Start Actor Controller
+
+    // Start Search Route
+    Route::post('/search', [SearchController::class, 'search'])->name('search');
+    // End Search Route
 
 });

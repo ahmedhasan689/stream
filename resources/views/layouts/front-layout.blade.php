@@ -48,7 +48,9 @@
                                                     <div class="form-group position-relative">
                                                         <input type="text" class="text search-input font-size-12"
                                                                placeholder="type here to search..." id="searchInput">
-                                                        <i class="search-link ri-search-line"></i>
+                                                        <button type="submit" class="btn btn-success">
+                                                            <i class="search-link ri-search-line"></i>
+                                                        </button>
                                                     </div>
                                                 </form>
                                             </div>
@@ -232,11 +234,14 @@
                                         <i class="ri-search-line"></i>
                                     </a>
                                     <div class="search-box iq-search-bar d-search">
-                                        <form action="#" class="searchbox">
-                                            <div class="form-group position-relative">
+                                        <form action="{{ route('search') }}" method="POST" class="searchbox">
+                                            @csrf
+                                            <div class="form-group position-relative d-flex">
                                                 <input type="text" class="text search-input font-size-12"
-                                                       placeholder="type here to search..." name="name" id="searchInput">
-                                                <i class="search-link ri-search-line"></i>
+                                                       placeholder="type here to search..." name="search" id="searchInput">
+                                                <button type="submit" class="btn btn-success" style="background-color: #E50813; border: none">
+                                                    <i class="search-link ri-search-line" style="left: 20px;top: 2px;"></i>
+                                                </button>
                                             </div>
                                         </form>
                                     </div>

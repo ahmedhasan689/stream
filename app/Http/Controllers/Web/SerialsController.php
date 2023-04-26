@@ -147,6 +147,15 @@ class SerialsController extends Controller
         $like_exists = SerialUser::query()->where('user_id', Auth::id())->pluck('serial_id')->toArray();
 
         switch ($type) {
+            case 'keep_watch':
+                $pageTitle = 'Keep Watching';
+                $data = Episode::query()->whereHas('user_points', function($query) {
+                    $query->where('user_id', Auth::id());
+                })->where('status', 1)->get();
+
+                return view('web.serial.view_all', compact('pageTitle', 'data', 'playlist_exists' , 'like_exists'));
+                break;
+
             case 'top_serial':
                 $pageTitle = 'Top Rated Serials';
                 $data = Serial::query()->orderBy('evaluation', 'desc')->where('status', 1)->get();

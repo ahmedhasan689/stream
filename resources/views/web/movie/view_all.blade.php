@@ -39,9 +39,16 @@
                                     </a>
                                 </h6>
                                 <div class="movie-time d-flex align-items-center my-2">
-                                <span class="text-white">
-                                    {{ \Carbon\Carbon::parse($movie->release_year)->isoFormat('MMMM DD, YY') }}
-                                </span>
+                                    @if( $pageTitle === 'Keep Watching' )
+                                        @php
+                                            $point = \App\Models\MoviePoint::where('movie_id', $movie->id)->where('user_id', auth()->user()->id)->first()->point;
+                                        @endphp
+                                        <span class="text-white">{{ round( $point, 0 ) * 100/100 }} seconds</span>
+                                    @else
+                                        <span class="text-white">
+                                            {{ \Carbon\Carbon::parse($movie->release_year)->isoFormat('MMMM DD, YY') }}
+                                        </span>
+                                    @endif
                                 </div>
                                 <div class="hover-buttons">
                                     <a href="{{ route('movie.show', ['slug' => $movie->slug]) }}" role="button"
@@ -53,9 +60,9 @@
                             <div class="block-social-info">
                                 <ul class="list-inline p-0 m-0 music-play-lists">
                                     <li class="share">
-                                                            <span>
-                                                                <i class="ri-share-fill"></i>
-                                                            </span>
+                                        <span>
+                                            <i class="ri-share-fill"></i>
+                                        </span>
                                         <div class="share-box">
                                             <div class="d-flex align-items-center">
                                                 <a href="https://www.facebook.com/sharer/sharer.php?u={{ url('movies') . '/' . $movie->slug }}"

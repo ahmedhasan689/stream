@@ -80,8 +80,7 @@
                         </div>
                     </div>
                     <div class="trailor-video  text-sm-right p-3  col-md-3 col-12">
-                        <a href="{{ asset('storage') . '/' . $serial->trailer }}"
-                           class="video-open playbtn block-images position-relative playbtn_thumbnail ">
+                        <a href="{{ $serial->trailer }}" class="video-open playbtn block-images position-relative playbtn_thumbnail ">
                             <img width="1920" height="1080" src="{{ asset('storage') . '/' . $serial->image }}"
                                  class="attachment-medium-large size-medium-large wp-post-image" alt=""  loading="lazy">
                             <span class="content btn btn-transparant iq-button">

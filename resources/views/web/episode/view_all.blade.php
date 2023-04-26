@@ -39,9 +39,16 @@
                                     </a>
                                 </h6>
                                 <div class="movie-time d-flex align-items-center my-2">
-                                <span class="text-white">
-                                    {{ \Carbon\Carbon::parse($episode->release_year)->isoFormat('MMMM DD, YY') }}
-                                </span>
+                                    @if( $pageTitle === 'Keep Watching' )
+                                        @php
+                                            $point = \App\Models\EpisodePoint::where('episode_id', $episode->id)->where('user_id', auth()->user()->id)->first()->point;
+                                        @endphp
+                                        <span class="text-white">{{ round( $point, 0 ) * 100/100 }} seconds</span>
+                                    @else
+                                        <span class="text-white">
+                                            {{ \Carbon\Carbon::parse($episode->release_year)->isoFormat('MMMM DD, YY') }}
+                                        </span>
+                                    @endif
                                 </div>
                                 <div class="hover-buttons">
                                     <a href="{{ route('episode.show', ['slug' => $episode->slug]) }}" role="button"

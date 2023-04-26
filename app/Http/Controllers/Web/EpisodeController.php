@@ -98,6 +98,15 @@ class EpisodeController extends Controller
 
 
         switch ($type) {
+            case 'keep_watch':
+                $pageTitle = 'Keep Watching';
+                $data = Episode::query()->whereHas('user_points', function($query) {
+                    $query->where('user_id', Auth::id());
+                })->where('status', 1)->get();
+
+                return view('web.episode.view_all', compact('pageTitle', 'data', 'playlist_exists' , 'like_exists'));
+                break;
+
             case 'most_like':
                 $pageTitle = 'Top Liked Episode';
                 $data = Episode::query()->whereHas('users', function($query) {
