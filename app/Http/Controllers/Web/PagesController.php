@@ -62,7 +62,7 @@ class PagesController extends Controller
      */
     public function tag(): Application|Factory|View
     {
-        $tags = Tag::query()->get();
+        $tags = Tag::query()->whereHas('movies')->get();
         return view('web.page.tag', compact('tags'));
     }
 

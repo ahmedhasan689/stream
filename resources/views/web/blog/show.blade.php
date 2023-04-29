@@ -72,7 +72,8 @@
                         <div id="search-2" class="widget widget_search">
                             <form method="POST" class="search-form" action="{{ route('searchBlog') }}" autocomplete="off">
                                 @csrf
-                                <label >
+
+                                <label>
                                     <span class="input-group screen-reader-text">Search for:</span>
                                 </label>
                                 <input type="search" class="search-field search__input"  placeholder="Search" value="" name="title">

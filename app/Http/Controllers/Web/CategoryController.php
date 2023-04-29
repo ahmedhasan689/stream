@@ -17,7 +17,8 @@ class CategoryController extends Controller
      */
     public function index(): Application|Factory|View
     {
-        $categories = Category::query()->where('status', 1)->get();
+        $categories = Category::query()->whereHas('movies')->where('status', 1)->get();
+
         $serial_categories = SerialCategory::query()->get();
         return view('web.category.index', compact('categories', 'serial_categories'));
     }
