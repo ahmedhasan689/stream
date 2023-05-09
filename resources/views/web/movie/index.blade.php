@@ -93,58 +93,13 @@
     </div>
 
     @section('js')
-{{--        <script>--}}
-{{--            $(document).on('click', '.delete_playlist', function(e) {--}}
-{{--                e.preventDefault()--}}
-
-{{--                var id = $(this).data('id')--}}
-
-{{--                $.ajax({--}}
-{{--                    url: "{{ route('movie_playlist.delete') }}",--}}
-{{--                    type: "GET",--}}
-{{--                    data: {--}}
-{{--                        id: id,--}}
-{{--                    },--}}
-{{--                    success: function(data){--}}
-{{--                        $.ajax({--}}
-{{--                            url: "{{ route('movie.index') }}"--}}
-{{--                        }).done(function(data) {--}}
-{{--                            $('.data').html(data);--}}
-{{--                        })--}}
-{{--                    },--}}
-{{--                    error: function(data){--}}
-
-{{--                    },--}}
-{{--                });--}}
-{{--            });--}}
-
-{{--            $(document).on('click', '.add_playlist', function(e) {--}}
-{{--                e.preventDefault()--}}
-
-{{--                var id = $(this).data('id')--}}
-
-{{--                $.ajax({--}}
-{{--                    url: "{{ route('movie_playlist.store') }}",--}}
-{{--                    type: "GET",--}}
-{{--                    data: {--}}
-{{--                        movie_id: id,--}}
-{{--                    },--}}
-{{--                    success: function(data){--}}
-{{--                        $.ajax({--}}
-{{--                            url: "{{ route('movie.index') }}"--}}
-{{--                        }).done(function(data) {--}}
-{{--                            $('.data').html(data);--}}
-{{--                        })--}}
-{{--                    },--}}
-{{--                    error: function(data){--}}
-
-{{--                    },--}}
-{{--                });--}}
-{{--            });--}}
-{{--        </script>--}}
         <script>
             $(document).on('click', '.delete_playlist', function (e) {
                 e.preventDefault()
+
+                if( !authUser ) {
+                    return window.location = '/login';
+                }
 
                 var id = $(this).data('id');
 
@@ -179,6 +134,10 @@
             $(document).on('click', '.add_playlist', function (e) {
                 e.preventDefault()
 
+                if( !authUser ) {
+                    return window.location = '/login';
+                }
+
                 var id = $(this).data('id')
                 $(this).empty();
                 $(this).addClass('delete_playlist');
@@ -211,6 +170,10 @@
             $(document).on('click', '.delete_like', function (e) {
                 e.preventDefault()
 
+                if( !authUser ) {
+                    return window.location = '/login';
+                }
+
                 var id = $(this).data('id');
 
                 $(this).empty();
@@ -236,6 +199,10 @@
 
             $(document).on('click', '.add_like', function (e) {
                 e.preventDefault()
+
+                if( !authUser ) {
+                    return window.location = '/login';
+                }
 
                 var id = $(this).data('id');
 

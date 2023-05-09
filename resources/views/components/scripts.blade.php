@@ -31,4 +31,7 @@
 
     })
 </script>
+<script>
+    let authUser = "{{ auth()->user()->id ?? null }}";
+</script>
 @yield('js')

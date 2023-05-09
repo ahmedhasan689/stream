@@ -169,6 +169,10 @@
             $(document).on('click', '.delete_playlist', function(e) {
                 var id = $(this).data('id')
 
+                if( !authUser ) {
+                    return window.location = '/login';
+                }
+
                 $.ajax({
                     url: "{{ route('episode_playlist.delete') }}",
                     type: "GET",
@@ -190,6 +194,10 @@
 
             $(document).on('click', '.add_playlist', function(e) {
                 e.preventDefault()
+
+                if( !authUser ) {
+                    return window.location = '/login';
+                }
 
                 var id = $(this).data('id')
 
@@ -215,6 +223,10 @@
             $(document).on('click', '.delete_like', function(e) {
                e.preventDefault()
 
+                if( !authUser ) {
+                    return window.location = '/login';
+                }
+
                 var id = $(this).data('id');
 
                 $.ajax({
@@ -235,6 +247,10 @@
 
             $(document).on('click', '.add_like', function(e) {
                 e.preventDefault()
+
+                if( !authUser ) {
+                    return window.location = '/login';
+                }
 
                 var id = $(this).data('id');
 
@@ -263,7 +279,6 @@
             }, false);
 
             video.addEventListener('pause', function() {
-                // alert('The video is paused at ' + this.currentTime + ' seconds.');
 
                 $.ajax({
                     method: 'POST',

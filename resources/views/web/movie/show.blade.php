@@ -396,6 +396,10 @@
             $(document).on('click', '.delete_playlist', function (e) {
                 var id = $(this).data('id')
 
+                if( !authUser ) {
+                    return window.location = '/login';
+                }
+
                 $.ajax({
                     url: "{{ route('movie_playlist.delete') }}",
                     type: "GET",
@@ -417,6 +421,10 @@
 
             $(document).on('click', '.add_playlist', function (e) {
                 e.preventDefault()
+
+                if( !authUser ) {
+                    return window.location = '/login';
+                }
 
                 var id = $(this).data('id')
 
@@ -442,6 +450,10 @@
             $(document).on('click', '.delete_like', function (e) {
                 e.preventDefault()
 
+                if( !authUser ) {
+                    return window.location = '/login';
+                }
+
                 var id = $(this).data('id');
 
                 $.ajax({
@@ -462,6 +474,10 @@
 
             $(document).on('click', '.add_like', function (e) {
                 e.preventDefault()
+
+                if( !authUser ) {
+                    return window.location = '/login';
+                }
 
                 var id = $(this).data('id');
 
@@ -491,7 +507,6 @@
             }, false);
 
             video.addEventListener('pause', function() {
-                // alert('The video is paused at ' + this.currentTime + ' seconds.');
 
                 $.ajax({
                     method: 'POST',
@@ -508,65 +523,6 @@
                     }
                 });
             });
-
-            {{--$(document).ready(function() {--}}
-            {{--    var video = document.getElementById("my-video");--}}
-            {{--    var lastPlayedTime = {{ $last_played_time }};--}}
-
-            {{--    if (lastPlayedTime > 0) {--}}
-            {{--        video.currentTime = lastPlayedTime;--}}
-            {{--    }--}}
-
-            {{--    console.log(video.currentTime);--}}
-            {{--});--}}
-
-            {{--document.addEventListener("DOMContentLoaded", function () {--}}
-            {{--    var lastPlayedTime = {{ $last_played_time }};--}}
-            {{--    var player = videojs('my-video', {}, function onPlayerReady() {--}}
-            {{--        var currentTime = lastPlayedTime;--}}
-            {{--        var savedTime = parseFloat('{{ session('last_played_time_' . $movie->id ) }}');--}}
-            {{--        if (savedTime) {--}}
-            {{--            currentTime = savedTime;--}}
-            {{--        }--}}
-
-            {{--        player.on('loadedmetadata', function() {--}}
-            {{--            player.currentTime(currentTime);--}}
-            {{--            player.play();--}}
-            {{--            player.autoplay('muted');--}}
-            {{--        });--}}
-
-            {{--        player.on('pause', function () {--}}
-            {{--            console.log('Done');--}}
-            {{--            var currentTime = player.currentTime();--}}
-
-            {{--            $.ajax({--}}
-            {{--                method: 'POST',--}}
-            {{--                url: '{{ route('movie.playedTime', ['id' => $movie->id]) }}',--}}
-            {{--                data: {--}}
-            {{--                    '_token': '{{ csrf_token() }}',--}}
-            {{--                    'last_played_time': currentTime--}}
-            {{--                },--}}
-            {{--                success: function (data) {--}}
-            {{--                    console.log(data);--}}
-            {{--                },--}}
-            {{--                error: function (jqXHR, textStatus, errorThrown) {--}}
-            {{--                    console.error(textStatus);--}}
-            {{--                }--}}
-            {{--            });--}}
-            {{--        });--}}
-
-            {{--    });--}}
-
-            {{--    --}}{{--// Add a delay before playing the video to ensure all components are loaded--}}
-            {{--    --}}{{--setTimeout(function(){--}}
-            {{--    --}}{{--    var lastPlayedTime = {{ $last_played_time ?? 0 }};--}}
-            {{--    --}}{{--    player.currentTime(lastPlayedTime);--}}
-            {{--    --}}{{--    player.play();--}}
-            {{--    --}}{{--}, 1000);--}}
-            {{--});--}}
-
-
-
         </script>
 
     @endsection

@@ -115,6 +115,10 @@
             $(document).on('click', '.delete_playlist', function (e) {
                 e.preventDefault()
 
+                if( !authUser ) {
+                    return window.location = '/login';
+                }
+
                 var id = $(this).data('id');
 
                 $(this).empty();
@@ -148,6 +152,10 @@
             $(document).on('click', '.add_playlist', function (e) {
                 e.preventDefault()
 
+                if( !authUser ) {
+                    return window.location = '/login';
+                }
+
                 var id = $(this).data('id')
                 $(this).empty();
                 $(this).addClass('delete_playlist');
@@ -180,6 +188,10 @@
             $(document).on('click', '.delete_like', function (e) {
                 e.preventDefault()
 
+                if( !authUser ) {
+                    return window.location = '/login';
+                }
+
                 var id = $(this).data('id');
 
                 $(this).empty();
@@ -205,6 +217,10 @@
 
             $(document).on('click', '.add_like', function (e) {
                 e.preventDefault()
+
+                if( !authUser ) {
+                    return window.location = '/login';
+                }
 
                 var id = $(this).data('id');
 
