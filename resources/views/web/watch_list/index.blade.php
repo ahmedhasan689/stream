@@ -82,9 +82,9 @@
                                         @endif
                                         @if( in_array($movie->id, $playlist_exists ) )
                                             <li class="delete_playlist" data-id="{{ $movie->id }}">
-                                                    <span href="#" style="background-color: #E50914; color: #fff">
-                                                        <i class="fa fa-check"></i>
-                                                    </span>
+                                                <span href="#" style="background-color: #E50914; color: #fff">
+                                                    <i class="fa fa-check"></i>
+                                                </span>
                                             </li>
                                         @else
                                             <li class="add_playlist" data-id="{{ $movie->id }}">
@@ -223,11 +223,7 @@
                         id: id,
                     },
                     success: function (data) {
-                        $.ajax({
-                            url: "{{ route('home') }}"
-                        }).done(function (data) {
-                            $('.content').html(data);
-                        })
+                        location.reload();
                     },
                     error: function (data) {
 
@@ -271,7 +267,7 @@
                 });
             });
 
-            $(document).on('click', '.delete_like', function (e) {
+            $(document).on('click', '.episode_delete_like', function (e) {
                 e.preventDefault()
 
                 if( !authUser ) {
@@ -280,9 +276,12 @@
 
                 var id = $(this).data('id');
 
+
+                console.log(id);
+
                 $(this).empty();
                 $(this).addClass('add_like');
-                $(this).removeClass('delete_like');
+                $(this).removeClass('episode_delete_like');
                 $(this).append(`
                     <span>
                         <i class="ri-heart-fill"></i>
@@ -296,7 +295,7 @@
                         id: id,
                     },
                     success: function (data) {
-
+                        location.reload();
                     }
                 })
             });
@@ -354,7 +353,7 @@
                         id: id,
                     },
                     success: function (data) {
-                        //
+                        location.reload();
                     },
                     error: function (data) {
 

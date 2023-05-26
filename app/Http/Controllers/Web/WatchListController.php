@@ -24,7 +24,7 @@ class WatchListController extends Controller
             $q->where('user_id', Auth::id());
         })->where('status', 1)->get();
 
-        $playlist_exists = MovieUserPlaylist::where('user_id', Auth::id())->pluck('id')->toArray();
+        $playlist_exists = MovieUserPlaylist::where('user_id', Auth::id())->pluck('movie_id')->toArray();
 
         $like_exists = MovieUser::query()->where('user_id', Auth::id())->pluck('movie_id')->toArray();
 

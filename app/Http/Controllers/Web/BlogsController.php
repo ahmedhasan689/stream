@@ -18,7 +18,7 @@ class BlogsController extends Controller
      */
     public function index(): Application|Factory|View
     {
-        $blogs = Blog::query()->orderBy('created_at', 'Desc')->get();
+        $blogs = Blog::query()->orderBy('created_at', 'Desc')->where('status', 1)->get();
 
         $recent_posts = Blog::query()->orderBy('created_at', 'Desc')->limit(3)->get();
 

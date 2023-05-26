@@ -40,14 +40,23 @@
         </div>
     </div>
     <div class="row align-items-center justify-content-between mb-3">
-        <div class="col-md-8">
+        <div class="col-md-8 dateData">
             <span class="text-light font-size-13">Date of Birth</span>
             <p class="mb-0">
                 {{ $user->date_of_birth }}
             </p>
+
+        </div>
+        <div class="col-md-8 d-none dateInput">
+            <div class="form-group">
+                <label>Date Of Birth</label>
+                <input type="date" name="date_of_birth" id="dateValue" value="{{ $user->date_of_birth }}" class="form-control date-input basicFlatpickr mb-0" placeholder="Select Date">
+            </div>
         </div>
         <div class="col-md-4 text-md-right text-left">
-            <a href="#" class="text-primary">Change</a>
+            <a href="#" class="text-primary ChangeDateBtn">Change</a>
+            <a href="#" class="text-primary d-none CancelDateBtn">Cancel</a>
+            <a href="#" class="text-primary d-none UpdateDateBtn">Update</a>
         </div>
     </div>
     <h5 class="mb-3 mt-4 pb-3 a-border">Billing Details</h5>
@@ -86,7 +95,7 @@
                     </span>
                 @enderror
                 <div class="my-3">
-                    <button type="submit" class="btn btn-success">
+                    <button type="submit" class="btn btn-success submitBtn">
                         Sure
                     </button>
                     <button type="button" class="btn btn-dark hideLogoutForm">

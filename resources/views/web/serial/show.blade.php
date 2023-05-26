@@ -3,7 +3,7 @@
     <div class="main-content">
         <div class="show-movie">
             <div class="container-fluid">
-                <div class="banner-wrapper overlay-wrapper iq-main-slider ">
+                <div class="banner-wrapper overlay-wrapper iq-main-slider" style="background-image: url({{ asset('storage') . '/' . $serial->image }})">
                     <div class="banner-caption">
                         <div class="movie-detail">
                             <div class="row">
@@ -56,28 +56,6 @@
                                 <h4 class="w-name text-white font-weight-700">Watch latest Episode</h4>
                             </a>
                         </div>
-                        <div class="row">
-                            <div class="col-12 mt-auto mb-auto">
-                                <ul class="list-inline p-0 m-0 share-icons music-play-lists">
-                                    <li class="share mb-0">
-                                        <span><i class="ri-share-fill"></i></span>
-                                        <div class="share-box">
-                                            <div class="d-flex align-items-center">
-                                                <a href="#" class="share-ico"><i class="ri-facebook-fill"></i></a>
-                                                <a href="#" class="share-ico"><i class="ri-twitter-fill"></i></a>
-                                                <a href="#" class="share-ico"><i class="ri-links-fill"></i></a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="mb-0">
-                                        <span><i class="ri-heart-fill"></i></span>
-                                    </li>
-                                    <li class="mb-0">
-                                        <span><i class="ri-add-line"></i></span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
                     </div>
                     <div class="trailor-video  text-sm-right p-3  col-md-3 col-12">
                         <a href="{{ $serial->trailer }}" class="video-open playbtn block-images position-relative playbtn_thumbnail ">
@@ -92,10 +70,10 @@
                 </div>
                 <section class="show-movie-section">
                     <div class="iq-custom-select d-inline-block sea-epi">
-                        <select name="cars" class="form-control season-select">
-                            @foreach( $serial->seasons as $season )
-                                <option value="season1">
-                                    {{ $season->name }}
+                        <select name="season" class="form-control season-select">
+                            @foreach( $serial->seasons as $single_season )
+                                <option value="{{ $single_season->id }}">
+                                    {{ $single_season->name }}
                                 </option>
                             @endforeach
                         </select>
@@ -107,47 +85,12 @@
                                     <a class="nav-link active show m-0" data-toggle="pill" href="#episodes" role="tab"
                                        aria-selected="true">Episodes</a>
                                 </li>
-{{--                                <li class="nav-item">--}}
-{{--                                    <a class="nav-link  m-0" data-toggle="pill" href="#feature-clips" role="tab"--}}
-{{--                                       aria-selected="false">FEATURED CLIPS</a>--}}
-{{--                                </li>--}}
                             </ul>
                         </div>
                         <div class="tab-content" id="nav-tabContent">
                             <div id="episodes" class=" tab-pane animated fadeInUp active show">
-                                <div class="row episodes list-inline p-0 mb-0 iq-rtl-direction">
-                                    @foreach( $serial->seasons as $season )
-                                        @foreach( $season->episodes as $episode )
-                                            <div class="e-item col-lg-3 col-sm-12 col-md-6">
-                                                <div class="block-image position-relative">
-                                                    <a href="{{ route('episode.show', ['slug' => $episode->slug]) }}">
-                                                        <img src="{{ asset('storage') . '/' . $episode->image }}" class="img-fluid img-zoom" alt="" loading="lazy">
-                                                    </a>
-                                                    <div class="episode-number">S0{{ $season->number }}E0{{ $episode->episode_number }}</div>
-                                                    <div class="episode-play-info">
-                                                        <div class="episode-play">
-                                                            <a href="{{ route('episode.show', ['slug' => $episode->slug]) }}">
-                                                                <i class="ri-play-fill"></i>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="epi-desc p-3">
-                                                    <div class="d-flex align-items-center justify-content-between mb-3">
-                                                        <span class="text-white rel-date">
-                                                            {{ \Carbon\Carbon::parse($serial->release_year)->isoFormat('MMMM DD, YY') }}
-                                                        </span>
-                                                        <span class="text-primary run-time">{{ $episode->minute }}min</span>
-                                                    </div>
-                                                    <a href="{{ route('episode.show', ['slug' => $episode->slug]) }}">
-                                                        <h5 class="epi-name text-white mb-0">
-                                                            {{ $episode->name }}
-                                                        </h5>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        @endforeach
-                                    @endforeach
+                                <div class="row episodes episodes-list list-inline p-0 mb-0 iq-rtl-direction">
+                                    @include('web.serial._episode_list')
                                 </div>
                             </div>
                         </div>
@@ -188,4 +131,34 @@
             </div>
         </div>
     </div>
+
+    @section('js')
+        <script>
+            $(document).on('change', '.season-select', function(e) {
+                e.preventDefault();
+
+                let id = $(this).val();
+
+                $.ajax({
+                    url: "{{ route('serial.getSeason') }}",
+                    type: "GET",
+                    data: {
+                        id: id,
+                    },
+                    success: function(data){
+                        $('.episodes-list').empty();
+                        $('.episodes-list').html(data);
+                    },
+                    error: function(data) {
+                        console.log(data);
+                    }
+                })
+            })
+
+            $(document).on('click', '.hide-me', function() {
+
+            })
+
+        </script>
+    @endsection
 </x-front-layout>

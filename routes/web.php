@@ -118,6 +118,7 @@ Route::middleware(['auth', 'email_verified'])->group(function() {
         ->prefix('serials')
         ->as('serial.')
         ->group(function() {
+            Route::get('/getSeason/', 'getSeason')->name('getSeason');
             Route::get('/', 'index')->name('index')->withoutMiddleware(['auth', 'email_verified']);
             Route::get('/{slug}', 'show')->name('show');
             Route::get('view_all/{type}', 'viewAll')->name('viewAll');

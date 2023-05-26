@@ -90,13 +90,13 @@ class SerialsController extends Controller
     {
         $serial = Serial::query()->where('slug', $slug)->first();
 
+        $season = Season::query()->where('serial_id', $serial->id)->first();
+
         $latest_episode = Episode::query()->with(['season' => function($query) use ($serial) {
             $query->where('serial_id', $serial->id)->orderBy('id', 'desc');
         }])->orderBy('id', 'desc')->first();
 
-
-
-        return view('web.serial.show', compact('serial', 'latest_episode'));
+        return view('web.serial.show', compact('serial', 'latest_episode', 'season'));
     }
 
     /**
@@ -182,5 +182,12 @@ class SerialsController extends Controller
                 return view('web.serial.view_all', compact('pageTitle', 'data', 'playlist_exists' , 'like_exists'));
                 break;
         }
+    }
+
+    public function getSeason(Request $request)
+    {
+        $season = Season::query()->findOrFail($request->id);
+
+        return view('web.serial._episode_list', compact('season'))->render();
     }
 }

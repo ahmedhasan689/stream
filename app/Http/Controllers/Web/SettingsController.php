@@ -37,9 +37,6 @@ class SettingsController extends Controller
         ]);
 
         if( $request->email ) {
-
-
-
             $user->update([
                'email' => $request->email,
             ]);
@@ -51,7 +48,35 @@ class SettingsController extends Controller
             ]);
         }
 
+        if( $request->date ) {
+            $user->update([
+                'date_of_birth' => $request->date,
+            ]);
+        }
 
+        if( $request->avatar ) {
+            $image_path = null;
+
+            if( $request->hasFile('avatar') ) {
+                $file = $request->file('avatar');
+
+                $image_path = $file->store('/uploads', [
+                    'disk' => 'public'
+                ]);
+
+                $user->update([
+                    'image' => $image_path,
+                ]);
+
+                return redirect()->back();
+            }else{
+                $image_path = $user->image;
+            }
+
+
+        }else{
+            return redirect()->back();
+        }
 
     }
 }

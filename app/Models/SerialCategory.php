@@ -22,5 +22,8 @@ class SerialCategory extends Pivot
      * ? With Category ( Actor Have Many Category )
      */
 
-
+    public function serial()
+    {
+        return $this->belongsTo(Serial::class, 'serial_id');
+    }
 }

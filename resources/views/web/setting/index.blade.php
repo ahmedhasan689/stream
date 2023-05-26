@@ -1,4 +1,26 @@
 <x-front-layout title="Settings">
+
+    @section('css')
+        <style>
+            .submitBtn, .modalSubmit{
+                background-color: #e50914;
+                border: none;
+            }
+
+            .submitBtn:hover, .modalSubmit:hover{
+                background-color: #bf000a;
+                color:white;
+            }
+            .modalSubmit {
+                color: white;
+            }
+            .buttons {
+                display: flex;
+                justify-content: end;
+                gap: 8px;
+            }
+        </style>
+    @endsection
 <!-- MainContent -->
     <section class="m-profile setting-wrapper">
         <div class="container">
@@ -10,7 +32,7 @@
                         <h4 class="mb-3">
                             {{ $user->name }}
                         </h4>
-                        <a href="#" class="edit-icon text-primary">Edit</a>
+                        <a href="#" class="edit-icon text-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</a>
                     </div>
                 </div>
                 <div class="col-lg-8" id="formData">
@@ -19,6 +41,34 @@
             </div>
         </div>
     </section>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content" style="background-color: #141414">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{ route('setting.update') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            @method('GET')
+                            <div class="mb-3">
+                                <label for="formFileMultiple" class="form-label">Upload Avatar</label>
+                                <input class="form-control" type="file" name="avatar" id="formFileMultiple" multiple>
+                            </div>
+
+                            <div class="mt-3 buttons">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary modalSubmit">Save changes</button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
 
     @section('js')
         <script>
@@ -100,6 +150,55 @@
                     type: "GET",
                     data: {
                         password: password,
+                    },
+                    success: function(data) {
+                        $.ajax({
+                            url: "{{ route('setting.index') }}",
+                            type: "GET",
+                        }).done(function(data) {
+                            $('#formData').html(data);
+                        });
+                    },
+                    error: function(data) {
+                        console.log(data);
+                    },
+                });
+            })
+
+            // Show Date Input
+            $(document).on('click', '.ChangeDateBtn', function(e) {
+                e.preventDefault();
+
+                $(this).addClass('d-none');
+                $('.UpdateDateBtn').removeClass('d-none'); // Update
+                $('.CancelDateBtn').removeClass('d-none'); // Cancel
+                $('.dateInput').removeClass('d-none'); // Date Input
+                $('.dateData').addClass('d-none'); // Data
+            });
+
+            // Cancel Btn For Date
+            $(document).on('click', '.CancelDateBtn', function(e) {
+                e.preventDefault();
+
+                $(this).addClass('d-none'); // Cancel BTN
+                $('.UpdateDateBtn').addClass('d-none'); // Update BTN
+                $('.dateInput').addClass('d-none'); //
+                $('.dateData').removeClass('d-none');
+                $('.ChangeDateBtn').removeClass('d-none');
+
+            });
+
+            // Update BTN For Date
+            $(document).on('click', '.UpdateDateBtn', function(e) {
+                e.preventDefault();
+
+                var date = $('#dateValue').val();
+
+                $.ajax({
+                    url: "{{ route('setting.update') }}",
+                    type: "GET",
+                    data: {
+                        date: date,
                     },
                     success: function(data) {
                         $.ajax({
